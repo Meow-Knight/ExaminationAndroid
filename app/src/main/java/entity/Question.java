@@ -8,16 +8,23 @@ public class Question implements Serializable {
 	 */
 	private static final long serialVersionUID = 531721818237891476L;
 	private String content;
-	private Integer answer;
-	private String createdBy;
+	private Integer examinationId;
+	private Examination examination;
 	
 	public Question() {
 	}
-
-	public Question(String content, Integer answer, String createdBy) {
+	
+	public Question(String content, Integer examinationId) {
+		super();
 		this.content = content;
-		this.answer = answer;
-		this.createdBy = createdBy;
+		this.examinationId = examinationId;
+	}
+
+	public Question(String content, Integer examinationId, Examination examination) {
+		super();
+		this.content = content;
+		this.examinationId = examinationId;
+		this.examination = examination;
 	}
 
 	public String getContent() {
@@ -27,26 +34,27 @@ public class Question implements Serializable {
 	public void setContent(String content) {
 		this.content = content;
 	}
-
-	public Integer getAnswer() {
-		return answer;
+	
+	public Examination getExamination() {
+		return examination;
 	}
 
-	public void setAnswer(Integer answer) {
-		this.answer = answer;
+	public void setExamination(Examination examination) {
+		this.examination = examination;
+	}
+	
+	public Integer getExaminationId() {
+		return examinationId;
 	}
 
-	public String getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(String createdBy) {
-		this.createdBy = createdBy;
+	public void setExaminationId(Integer examinationId) {
+		this.examinationId = examinationId;
 	}
 
 	@Override
 	public String toString() {
-		return "Question [content=" + content + ", answer=" + answer + ", createdBy=" + createdBy + "]";
+		return "Question [content=" + content + ", examinationId=" + examinationId + ", examination=" + examination
+				+ "]";
 	}
-
+	
 }

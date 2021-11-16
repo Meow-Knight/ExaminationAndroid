@@ -10,14 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tcpexamination.R;
 
-public class ShowScheduleFragment extends Fragment {
+import java.util.List;
+
+import entity.Examination;
+
+public class ListExaminationFragment extends Fragment {
 
     public static final String FRAGMENT_TAG = "SHOW_SCHEDULE_FRAGMENT";
 
     private View view;
+    private RecyclerView rvExamination;
+
+    private List<Examination> examinations;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -29,7 +37,7 @@ public class ShowScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_show_schedule, container, false);
+            view = inflater.inflate(R.layout.fragment_history, container, false);
         }
         return view;
     }
@@ -42,6 +50,7 @@ public class ShowScheduleFragment extends Fragment {
     }
 
     private void mapComponents(View view) {
+        rvExamination = view.findViewById(R.id.rv_examinations);
     }
 
 }

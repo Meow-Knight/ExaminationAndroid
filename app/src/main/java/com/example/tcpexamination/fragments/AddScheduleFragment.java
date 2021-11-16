@@ -32,7 +32,7 @@ public class AddScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_add_schedule, container, false);
+            view = inflater.inflate(R.layout.fragment_examinations, container, false);
         }
         return view;
     }

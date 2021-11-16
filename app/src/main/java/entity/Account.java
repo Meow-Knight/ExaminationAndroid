@@ -9,13 +9,15 @@ public class Account implements Serializable {
 	private static final long serialVersionUID = -7219916113860449953L;
 	
 	private String email;
+	private String name;
 	private Integer role;
 	
 	public Account() {
 	}
-
-	public Account(String email, Integer role) {
+	
+	public Account(String email, String name, Integer role) {
 		this.email = email;
+		this.name = name;
 		this.role = role;
 	}
 
@@ -33,6 +35,14 @@ public class Account implements Serializable {
 
 	public void setRole(Integer role) {
 		this.role = role;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

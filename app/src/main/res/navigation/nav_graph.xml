@@ -9,7 +9,7 @@
         android:id="@+id/showSchedule"
         android:name="com.example.docterscheduler.fragments.ShowScheduleFragment"
         android:label="fragment_show_schedule"
-        tools:layout="@layout/fragment_show_schedule" >
+        tools:layout="@layout/fragment_history" >
         <action
             android:id="@+id/action_showSchedule_to_addSchedule"
             app:destination="@id/addSchedule" />
@@ -18,5 +18,5 @@
         android:id="@+id/addSchedule"
         android:name="com.example.docterscheduler.fragments.AddScheduleFragment"
         android:label="fragment_add_schedule"
-        tools:layout="@layout/fragment_add_schedule" />
+        tools:layout="@layout/fragment_examinations" />
 </navigation>

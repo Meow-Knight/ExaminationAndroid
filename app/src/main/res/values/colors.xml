@@ -10,9 +10,11 @@
     <color name="red">#DA0323</color>
     <color name="toolbarTextColor">#E6D4D4</color>
     <color name="greycolor">#B5B6B6</color>
+    <color name="dimgray">#696969</color>
     <color name="title_exam_color">#D70BFA</color>
     <color name="time_color">#F6F5EC</color>
     <color name="percent">#1BDF2E</color>
+    <color name="green">#008000</color>
     <color name="lightest_gray">#DCDCDC</color>
     <color name="dark_blue">#193498</color>
     <color name="secondary_blue">#113CFC</color>
