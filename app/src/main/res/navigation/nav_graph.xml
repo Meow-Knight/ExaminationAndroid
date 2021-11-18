@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/showSchedule"
-        android:name="com.example.docterscheduler.fragments.ShowScheduleFragment"
+        android:name="com.example.tcpexamination.fragments.ListExaminationFragment"
         android:label="fragment_show_schedule"
         tools:layout="@layout/fragment_history" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/addSchedule"
-        android:name="com.example.docterscheduler.fragments.AddScheduleFragment"
+        android:name="com.example.tcpexamination.fragments.HistoryFragment"
         android:label="fragment_add_schedule"
         tools:layout="@layout/fragment_examinations" />
 </navigation>

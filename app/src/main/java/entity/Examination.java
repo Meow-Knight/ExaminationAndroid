@@ -1,7 +1,7 @@
 package entity;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Examination implements Serializable {
 
@@ -11,8 +11,9 @@ public class Examination implements Serializable {
 	private static final long serialVersionUID = 8638093418038654237L;
 
 	// core field
-	private Date startTime;
-	private Date endTime;
+	private Long id;
+	private Timestamp startTime;
+	private Timestamp endTime;
 	private String title;
 	private String description;
 	private Integer duration;
@@ -26,9 +27,9 @@ public class Examination implements Serializable {
 	public Examination() {
 	}
 
-	public Examination(Date startTime, Date endTime, String title, String description, Integer duration,
+	public Examination(Long id, Timestamp startTime, Timestamp endTime, String title, String description, Integer duration,
 			String createdByAccountID) {
-		super();
+		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.title = title;
@@ -37,9 +38,10 @@ public class Examination implements Serializable {
 		this.createdByAccountID = createdByAccountID;
 	}
 
-	public Examination(Date startTime, Date endTime, String title, String description, Account createdBy,
+	public Examination(Long id, Timestamp startTime, Timestamp endTime, String title, String description, Account createdBy,
 			Integer duration, String createdByAccountID) {
 		super();
+		this.id = id;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.title = title;
@@ -48,20 +50,28 @@ public class Examination implements Serializable {
 		this.duration = duration;
 		this.createdByAccountID = createdByAccountID;
 	}
+	
+	public Long getId() {
+		return id;
+	}
 
-	public Date getStartTime() {
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Timestamp getStartTime() {
 		return startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public Timestamp getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(Timestamp endTime) {
 		this.endTime = endTime;
 	}
 
@@ -123,8 +133,9 @@ public class Examination implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Examination [startTime=" + startTime + ", endTime=" + endTime + ", title=" + title + ", description="
-				+ description + ", createdBy=" + createdBy + ", duration=" + duration + ", createdByAccountID="
-				+ createdByAccountID + "]";
+		return "Examination [id=" + id + ", startTime=" + startTime + ", endTime=" + endTime + ", title=" + title
+				+ ", description=" + description + ", duration=" + duration + ", createdByAccountID="
+				+ createdByAccountID + ", createdByAccountName=" + createdByAccountName + ", createdBy=" + createdBy
+				+ ", questionAmount=" + questionAmount + "]";
 	}
 }

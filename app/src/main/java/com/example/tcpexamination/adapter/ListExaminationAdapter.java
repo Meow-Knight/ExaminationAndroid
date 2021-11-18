@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tcpexamination.R;
+import com.example.tcpexamination.utils.DateUtil;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -36,13 +37,13 @@ public class ListExaminationAdapter extends RecyclerView.Adapter<ListExamination
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Examination examination = examinations.get(position);
 
-        holder.tvFromTime.setText(examination.getStartTime().toString());
-        holder.tvToTime.setText(examination.getEndTime().toString());
+        holder.tvFromTime.setText(DateUtil.formatDate(examination.getStartTime()));
+        holder.tvToTime.setText(DateUtil.formatDate(examination.getEndTime()));
         holder.tvExamTitle.setText(examination.getTitle());
         holder.tvExamDescription.setText(examination.getDescription());
         holder.tvCreatedBy.setText(examination.getCreatedByAccountName());
-        holder.tvExamDuration.setText(examination.getDuration());
-        holder.tvQuestionAmount.setText(examination.getQuestionAmount());
+        holder.tvExamDuration.setText(examination.getDuration() + "");
+        holder.tvQuestionAmount.setText(examination.getQuestionAmount() + "");
     }
 
     @Override

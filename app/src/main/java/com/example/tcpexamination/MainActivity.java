@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tcpexamination.fragments.AddScheduleFragment;
+import com.example.tcpexamination.fragments.HistoryFragment;
 import com.example.tcpexamination.fragments.ListExaminationFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private NavigationView navigationView;
     private View headerView;
 
-    public ListExaminationFragment showScheduleFragment;
-    public AddScheduleFragment addScheduleFragment;
+    public ListExaminationFragment listExaminationFragment;
+    public HistoryFragment addScheduleFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
 
-        showScheduleFragment = new ListExaminationFragment();
-        addScheduleFragment = new AddScheduleFragment();
+        listExaminationFragment = new ListExaminationFragment();
+        addScheduleFragment = new HistoryFragment();
 
         if (currentUser == null) {
             finish();
@@ -129,10 +129,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (fragmentId) {
             case R.id.it_examination:
-                fragmentTransaction.replace(R.id.nav_host_fragment, showScheduleFragment, ListExaminationFragment.FRAGMENT_TAG);
+                fragmentTransaction.replace(R.id.nav_host_fragment, listExaminationFragment, ListExaminationFragment.FRAGMENT_TAG);
                 break;
             case R.id.it_history:
-                fragmentTransaction.replace(R.id.nav_host_fragment, addScheduleFragment, AddScheduleFragment.FRAGMENT_TAG);
+                fragmentTransaction.replace(R.id.nav_host_fragment, addScheduleFragment, HistoryFragment.FRAGMENT_TAG);
                 break;
         }
 

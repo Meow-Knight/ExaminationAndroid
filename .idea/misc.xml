@@ -3,6 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/fragment_examinations.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/fragment_history.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/item_examination.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/navigation.xml" value="0.1" />
         <entry key="..\:/workspace/AndroidStudioClass/TCPExamination/app/src/main/res/drawable/border.xml" value="0.20260416666666667" />
         <entry key="..\:/workspace/AndroidStudioClass/TCPExamination/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.134375" />
         <entry key="..\:/workspace/AndroidStudioClass/TCPExamination/app/src/main/res/layout/activity_login.xml" value="0.18645833333333334" />

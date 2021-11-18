@@ -13,13 +13,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tcpexamination.R;
 
-public class AddScheduleFragment extends Fragment {
+public class HistoryFragment extends Fragment {
 
-    public static final String FRAGMENT_TAG = "ADD_SCHEDULE_FRAGMENT";
+    public static final String FRAGMENT_TAG = "HISTORY_FRAGMENT";
 
     private View view;
 
-    public AddScheduleFragment() {
+    public HistoryFragment() {
     }
 
     @Override
@@ -32,7 +32,7 @@ public class AddScheduleFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         if (view == null) {
-            view = inflater.inflate(R.layout.fragment_examinations, container, false);
+            view = inflater.inflate(R.layout.fragment_history, container, false);
         }
         return view;
     }

@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import com.example.tcpexamination.utils.SocketUtil;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -20,6 +21,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+
+import java.net.Socket;
+
+import entity.Account;
 
 public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
@@ -103,6 +108,17 @@ public class LoginActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         progressBar.setVisibility(View.GONE);
                         ivGoogle.setVisibility(View.VISIBLE);
+                        Thread creatingAccountThread = new Thread() {
+                            @Override
+                            public void run() {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                String email = user.getEmail();
+                                String name = user.getDisplayName();
+                                Account account = new Account(email, name, 1);
+                                SocketUtil.getInstance().asyncAccount(account);
+                            }
+                        };
+                        creatingAccountThread.start();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
