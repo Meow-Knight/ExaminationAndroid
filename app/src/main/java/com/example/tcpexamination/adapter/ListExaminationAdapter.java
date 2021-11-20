@@ -1,6 +1,7 @@
 package com.example.tcpexamination.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tcpexamination.DoingExaminationActivity;
 import com.example.tcpexamination.R;
 import com.example.tcpexamination.utils.DateUtil;
 import com.google.android.material.card.MaterialCardView;
@@ -59,10 +61,16 @@ public class ListExaminationAdapter extends RecyclerView.Adapter<ListExamination
         TextView tvCreatedBy;
         TextView tvExamDuration;
         TextView tvQuestionAmount;
+        TextView btStartTest;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            mapComponents(itemView);
+            initEvents(itemView);
+        }
+
+        private void mapComponents(View itemView) {
             tvFromTime = itemView.findViewById(R.id.tv_from_time);
             tvToTime = itemView.findViewById(R.id.tv_to_time);
             tvExamTitle = itemView.findViewById(R.id.tv_exam_title);
@@ -70,6 +78,17 @@ public class ListExaminationAdapter extends RecyclerView.Adapter<ListExamination
             tvCreatedBy = itemView.findViewById(R.id.tv_exam_created_by);
             tvExamDuration = itemView.findViewById(R.id.tv_exam_duration);
             tvQuestionAmount = itemView.findViewById(R.id.tv_exam_question_amount);
+            btStartTest = itemView.findViewById(R.id.bt_start_test);
+        }
+
+        private void initEvents(View itemView) {
+            btStartTest.setOnClickListener(v -> {
+                Examination currentExamination = examinations.get(getLayoutPosition());
+                Long examinationId = currentExamination.getId();
+                Intent intent = new Intent(itemView.getContext(), DoingExaminationActivity.class);
+                intent.putExtra("examination_id", examinationId);
+                itemView.getContext().startActivity(intent);
+            });
         }
     }
 }

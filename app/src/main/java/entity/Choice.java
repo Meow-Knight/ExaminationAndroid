@@ -7,27 +7,38 @@ public class Choice implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -812322956597375815L;
+	private Long id;
 	private String content;
 	private Boolean isAnswer;
-	private Integer questionId;
+	private Long questionId;
 	private Question question;
 	
 	public Choice() {
 	}
 	
-	public Choice(String content, Boolean isAnswer, Integer questionId) {
+	public Choice(Long id, String content, Boolean isAnswer, Long questionId) {
 		super();
+		this.id = id;
 		this.content = content;
 		this.isAnswer = isAnswer;
 		this.questionId = questionId;
 	}
 
-	public Choice(String content, Boolean isAnswer, Integer questionId, Question question) {
+	public Choice(Long id, String content, Boolean isAnswer, Long questionId, Question question) {
 		super();
+		this.id = id;
 		this.content = content;
 		this.isAnswer = isAnswer;
 		this.questionId = questionId;
 		this.question = question;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public Choice(String content) {
@@ -58,18 +69,18 @@ public class Choice implements Serializable {
 		this.isAnswer = isAnswer;
 	}
 
-	public Integer getQuestionId() {
+	public Long getQuestionId() {
 		return questionId;
 	}
 
-	public void setQuestionId(Integer questionId) {
+	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
 	}
 
 	@Override
 	public String toString() {
-		return "Choice [content=" + content + ", isAnswer=" + isAnswer + ", questionId=" + questionId + ", question="
-				+ question + "]";
+		return "Choice [id=" + id + ", content=" + content + ", isAnswer=" + isAnswer + ", questionId=" + questionId
+				+ ", question=" + question + "]";
 	}
-	
+
 }

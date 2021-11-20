@@ -1,30 +1,43 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Question implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 531721818237891476L;
+	private Long id;
 	private String content;
-	private Integer examinationId;
+	private Long examinationId;
 	private Examination examination;
+	private List<Choice> choices;
 	
 	public Question() {
 	}
 	
-	public Question(String content, Integer examinationId) {
+	public Question(Long id, String content, Long examinationId) {
 		super();
+		this.id = id;
 		this.content = content;
 		this.examinationId = examinationId;
 	}
 
-	public Question(String content, Integer examinationId, Examination examination) {
+	public Question(Long id, String content, Long examinationId, Examination examination) {
 		super();
+		this.id = id;
 		this.content = content;
 		this.examinationId = examinationId;
 		this.examination = examination;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getContent() {
@@ -43,18 +56,26 @@ public class Question implements Serializable {
 		this.examination = examination;
 	}
 	
-	public Integer getExaminationId() {
+	public Long getExaminationId() {
 		return examinationId;
 	}
 
-	public void setExaminationId(Integer examinationId) {
+	public void setExaminationId(Long examinationId) {
 		this.examinationId = examinationId;
+	}
+	
+	public List<Choice> getChoices() {
+		return choices;
+	}
+
+	public void setChoices(List<Choice> choices) {
+		this.choices = choices;
 	}
 
 	@Override
 	public String toString() {
-		return "Question [content=" + content + ", examinationId=" + examinationId + ", examination=" + examination
-				+ "]";
+		return "Question [id=" + id + ", content=" + content + ", examinationId=" + examinationId + ", examination="
+				+ examination + "]";
 	}
-	
+
 }

@@ -35,11 +35,10 @@ public class ListExaminationFragment extends Fragment {
     public static final String FRAGMENT_TAG = "LIST_EXAMINATION_FRAGMENT";
 
     private View view;
-    private MainActivity parentActivity;
     private RecyclerView rvExamination;
     private ListExaminationAdapter examinationAdapter;
 
-    private List<Examination> examinations;
+    private List<Examination> mExaminations;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,50 +67,28 @@ public class ListExaminationFragment extends Fragment {
     }
 
     private void fetchData() {
-        Log.d("hehe", "in fetch");
         FetchExaminationTask task = new FetchExaminationTask();
         task.execute();
-//        MainActivity mainActivity = (MainActivity) view.getContext();
-//        mainActivity.runOnUiThread(new Runnable() {
-//            @Override
-////            public void run() {
-//                examinations = SocketUtil.getInstance().getAllExaminations();
-//                Log.d("hehe", "dddd");
-//                examinationAdapter = new ListExaminationAdapter(view.getContext(), examinations);
-//                rvExamination.setAdapter(examinationAdapter);
-//            }
-//        });
     }
 
     private void mapComponents(View view) {
         rvExamination = view.findViewById(R.id.rv_examinations);
     }
 
-    class FetchExaminationTask extends AsyncTask<String, String, Examination[]> {
+    class FetchExaminationTask extends AsyncTask<String, String, List<Examination>> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
         }
 
-        protected Examination[] doInBackground(String... params) {
-            Log.d("hehe", "doInBackground");
-            Examination[] examinations = SocketUtil.getInstance().getAllExaminations();
-            Log.d("hehe", examinations.length + "");
-//            Log.d("hehe", examinations.size() + "");
-
-//            ((MainActivity) view.getContext()).runOnUiThread(new Runnable() {
-//                public void run() {
-//
-//                }
-//            });
-
-            return examinations;
+        protected List<Examination> doInBackground(String... params) {
+            return SocketUtil.getInstance().getAllExaminations();
         }
 
         @Override
-        protected void onPostExecute(Examination[] examinations) {
-            List<Examination> hehe = Arrays.asList(examinations);
-            examinationAdapter = new ListExaminationAdapter(view.getContext(), hehe);
+        protected void onPostExecute(List<Examination> examinations) {
+            mExaminations = examinations;
+            examinationAdapter = new ListExaminationAdapter(view.getContext(), mExaminations);
             rvExamination.setAdapter(examinationAdapter);
         }
     }

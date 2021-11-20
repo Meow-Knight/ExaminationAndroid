@@ -3,10 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/drawable/circle_tv_choice.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/drawable/ic_baseline_clear_24.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/drawable/rounded_button.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/drawable/rounded_corner_button.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/activity_doing_examination.xml" value="0.33" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/fragment_examinations.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/fragment_history.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/item_choice.xml" value="0.5" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/item_examination.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/item_question.xml" value="0.38288770053475935" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/TCPExamination/app/src/main/res/layout/navigation.xml" value="0.1" />
         <entry key="..\:/workspace/AndroidStudioClass/TCPExamination/app/src/main/res/drawable/border.xml" value="0.20260416666666667" />
         <entry key="..\:/workspace/AndroidStudioClass/TCPExamination/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.134375" />

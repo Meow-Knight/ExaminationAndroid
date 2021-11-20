@@ -14,6 +14,7 @@ import java.util.List;
 
 import entity.Account;
 import entity.Examination;
+import entity.Question;
 
 public class SocketUtil {
     private static final String SERVER_ADDRESS = "192.168.43.6";
@@ -61,20 +62,14 @@ public class SocketUtil {
         }
     }
 
-    public Examination[] getAllExaminations() {
-        Examination[] examinations = new Examination[0];
+    public List<Examination> getAllExaminations() {
+        List<Examination> examinations = new ArrayList<>();
         try {
             Log.d("hehe", "writing...");
             dos.writeUTF(SocketRequestType.GET_EXAMINATIONS.getName());
             dos.flush();
             Log.d("hehe", "wrtited...");
-            Object[] objs = (Object[]) din.readObject();
-            examinations = new Examination[objs.length];
-            for (int i = 0; i < objs.length; i++){
-                examinations[i] = (Examination) objs[i];
-                Log.d("hehe", examinations[i].toString());
-            }
-            Log.d("hehe", examinations.length + "");
+            examinations = (ArrayList<Examination>) din.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -90,13 +85,27 @@ public class SocketUtil {
 //            dos.writeUTF(email);
 //            dos.flush();
             account = (Account) din.readObject();
-            Log.d("hehe", account.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
         return account;
+    }
+
+    public List<Question> getQuestionByExamId(Long examinationId) {
+        List<Question> questions;
+
+        try {
+            dos.writeUTF(SocketRequestType.GET_LIST_QUESTIONS_BY_EXAM_ID.getName());
+            dos.flush();
+            dos.writeLong(examinationId);
+            dos.flush();
+            questions = (List<Question>) din.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            questions = new ArrayList<>();
+            e.printStackTrace();
+        }
+
+        return questions;
     }
 }
