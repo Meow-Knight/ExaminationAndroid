@@ -3,6 +3,7 @@ package com.example.tcpexamination;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tcpexamination.adapter.ListQuestionAdapter;
+import com.example.tcpexamination.common.CustomLinearLayoutManager;
 import com.example.tcpexamination.utils.SocketUtil;
 
 import java.util.List;
@@ -29,6 +31,7 @@ public class DoingExaminationActivity extends AppCompatActivity {
     private TextView btNextQuestion;
 
     private RecyclerView rvQuestions;
+    private CustomLinearLayoutManager layoutManager;
     private ListQuestionAdapter questionAdapter;
 
     @Override
@@ -46,10 +49,57 @@ public class DoingExaminationActivity extends AppCompatActivity {
         examinationId = bundle.getLong("examination_id");
 
         mapComponents();
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        initEvents();
+        layoutManager = new CustomLinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        layoutManager.setScrollHorizontalEnabled(true);
         rvQuestions.setLayoutManager(layoutManager);
         FetchQuestionTask fetchQuestionTask = new FetchQuestionTask();
         fetchQuestionTask.execute();
+    }
+
+    private void initEvents() {
+        btNextQuestion.setOnClickListener(v -> {
+            layoutManager.setScrollHorizontalEnabled(true);
+
+            rvQuestions.smoothScrollToPosition(questionAdapter.increaseItemPosition());
+            if (questionAdapter.isReachedLastItem()) {
+                btNextQuestion.setVisibility(View.GONE);
+            }
+            if (btBackQuestion.getVisibility() == View.GONE) {
+                btBackQuestion.setVisibility(View.VISIBLE);
+            }
+
+            disableScrollQuestions();
+        });
+
+        btBackQuestion.setOnClickListener(v -> {
+            layoutManager.setScrollHorizontalEnabled(true);
+
+            rvQuestions.smoothScrollToPosition(questionAdapter.decreaseItemPosition());
+            if (questionAdapter.isReachedFirstItem()) {
+                btBackQuestion.setVisibility(View.GONE);
+            }
+            if (btNextQuestion.getVisibility() == View.GONE) {
+                btNextQuestion.setVisibility(View.VISIBLE);
+            }
+
+            disableScrollQuestions();
+        });
+    }
+
+    public void disableScrollQuestions() {
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                layoutManager.setScrollHorizontalEnabled(false);
+            }
+        };
+        thread.start();
     }
 
     private void mapComponents() {
@@ -77,8 +127,6 @@ public class DoingExaminationActivity extends AppCompatActivity {
             mQuestions = examinations;
             questionAdapter = new ListQuestionAdapter(getApplicationContext(), mQuestions);
             rvQuestions.setAdapter(questionAdapter);
-//            examinationAdapter = new ListExaminationAdapter(getContext(), mQuestions);
-//            rvExamination.setAdapter(examinationAdapter);
         }
     }
 }

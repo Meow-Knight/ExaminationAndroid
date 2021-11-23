@@ -20,10 +20,28 @@ import entity.Question;
 public class ListQuestionAdapter extends RecyclerView.Adapter<ListQuestionAdapter.ViewHolder> {
     private Context context;
     private List<Question> questions;
+    private int currentItemPosition;
 
     public ListQuestionAdapter(Context context, List<Question> questions) {
         this.context = context;
         this.questions = questions;
+        this.currentItemPosition = 0;
+    }
+
+    public int increaseItemPosition() {
+        return ++this.currentItemPosition;
+    }
+
+    public int decreaseItemPosition() {
+        return --this.currentItemPosition;
+    }
+
+    public boolean isReachedFirstItem() {
+        return this.currentItemPosition == 0;
+    }
+
+    public boolean isReachedLastItem() {
+        return this.currentItemPosition == this.questions.size() - 1;
     }
 
     @NonNull
