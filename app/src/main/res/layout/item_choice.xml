@@ -16,6 +16,7 @@
     app:strokeColor="@color/lightest_gray">
 
     <LinearLayout
+        android:id="@+id/layout_choice_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

@@ -12,6 +12,8 @@ public class Choice implements Serializable {
 	private Boolean isAnswer;
 	private Long questionId;
 	private Question question;
+
+	private boolean isChecked = false;
 	
 	public Choice() {
 	}
@@ -75,6 +77,14 @@ public class Choice implements Serializable {
 
 	public void setQuestionId(Long questionId) {
 		this.questionId = questionId;
+	}
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+
+	public boolean isChecked() {
+		return this.isChecked;
 	}
 
 	@Override

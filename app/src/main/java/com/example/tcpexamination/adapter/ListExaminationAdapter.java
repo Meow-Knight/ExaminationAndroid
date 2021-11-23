@@ -84,9 +84,9 @@ public class ListExaminationAdapter extends RecyclerView.Adapter<ListExamination
         private void initEvents(View itemView) {
             btStartTest.setOnClickListener(v -> {
                 Examination currentExamination = examinations.get(getLayoutPosition());
-                Long examinationId = currentExamination.getId();
+//                Long examinationId = currentExamination.getId();
                 Intent intent = new Intent(itemView.getContext(), DoingExaminationActivity.class);
-                intent.putExtra("examination_id", examinationId);
+                intent.putExtra("current_examination", currentExamination);
                 itemView.getContext().startActivity(intent);
             });
         }

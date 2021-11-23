@@ -12,11 +12,13 @@
     <color name="toolbarTextColor">#E6D4D4</color>
     <color name="greycolor">#B5B6B6</color>
     <color name="dimgray">#696969</color>
+    <color name="dimgray60">#99696969</color>
     <color name="title_exam_color">#D70BFA</color>
     <color name="time_color">#F6F5EC</color>
     <color name="percent">#1BDF2E</color>
     <color name="green">#008000</color>
     <color name="lightest_gray">#DCDCDC</color>
+    <color name="white_gray">#E8E7E7</color>
     <color name="dark_blue">#193498</color>
     <color name="secondary_blue">#113CFC</color>
     <color name="light_blue">#1597E5</color>
@@ -24,5 +26,7 @@
     <color name="lightest_blue">#8AC7DB</color>
     <color name="lightest_pink">#FFC0CB</color>
     <color name="pink">#FF647F</color>
+    <color name="red_pink">#f34097</color>
+    <color name="purple">#a841b0</color>
     <color name="orange">#FF9900</color>
 </resources>
