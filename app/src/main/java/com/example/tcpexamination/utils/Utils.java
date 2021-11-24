@@ -26,8 +26,14 @@ public class Utils {
     }
 
     public static int calculateScore(List<Question> questions) {
-        int correctChoiceAmount = 0;
+        int correctChoiceAmount = getCorrectAnswerAmount(questions);
         int totalQuestionAmount = questions.size();
+
+        return Math.round((float)correctChoiceAmount * 10 / totalQuestionAmount);
+    }
+
+    public static int getCorrectAnswerAmount(List<Question> questions) {
+        int correctChoiceAmount = 0;
 
         for (Question question: questions) {
             List<Choice> choices = question.getChoices();
@@ -44,6 +50,6 @@ public class Utils {
             }
         }
 
-        return Math.round((float)correctChoiceAmount * 10 / totalQuestionAmount);
+        return correctChoiceAmount;
     }
 }

@@ -1,6 +1,5 @@
 package com.example.tcpexamination;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -8,7 +7,6 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,35 +59,43 @@ public class DoingExaminationActivity extends AppCompatActivity {
 
     private void initEvents() {
         btNextQuestion.setOnClickListener(v -> {
-            layoutManager.setScrollHorizontalEnabled(true);
+            if (!questionAdapter.isReachedLastItem()) {
+                if (questionAdapter.isReachedFirstItem()) {
+                    btBackQuestion.setBackground(getDrawable(R.drawable.rounded_back_button));
+                    btBackQuestion.setTextColor(getResources().getColor(R.color.black));
+                }
 
-            rvQuestions.smoothScrollToPosition(questionAdapter.increaseItemPosition());
-            if (questionAdapter.isReachedLastItem()) {
-                btNextQuestion.setVisibility(View.GONE);
-            }
-            if (btBackQuestion.getVisibility() == View.GONE) {
-                btBackQuestion.setVisibility(View.VISIBLE);
-            }
+                layoutManager.setScrollHorizontalEnabled(true);
 
-            disableScrollQuestions();
+                rvQuestions.smoothScrollToPosition(questionAdapter.increaseItemPosition());
+                if (questionAdapter.isReachedLastItem()) {
+                    btNextQuestion.setBackground(getDrawable(R.drawable.disable_next_button));
+                }
+
+                disableScrollQuestions();
+            }
         });
 
         btBackQuestion.setOnClickListener(v -> {
-            layoutManager.setScrollHorizontalEnabled(true);
+            if (!questionAdapter.isReachedFirstItem()) {
+                if (questionAdapter.isReachedLastItem()) {
+                    btNextQuestion.setBackground(getDrawable(R.drawable.rounded_next_button));
+                }
 
-            rvQuestions.smoothScrollToPosition(questionAdapter.decreaseItemPosition());
-            if (questionAdapter.isReachedFirstItem()) {
-                btBackQuestion.setVisibility(View.GONE);
-            }
-            if (btNextQuestion.getVisibility() == View.GONE) {
-                btNextQuestion.setVisibility(View.VISIBLE);
-            }
+                layoutManager.setScrollHorizontalEnabled(true);
 
-            disableScrollQuestions();
+                rvQuestions.smoothScrollToPosition(questionAdapter.decreaseItemPosition());
+                if (questionAdapter.isReachedFirstItem()) {
+                    btBackQuestion.setBackground(getDrawable(R.drawable.disable_back_button));
+                    btBackQuestion.setTextColor(getResources().getColor(R.color.greycolor));
+                }
+
+                disableScrollQuestions();
+            }
         });
 
         btFinishExamination.setOnClickListener(v -> new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setIcon(getResources().getDrawable(R.drawable.ic_baseline_warning_24))
             .setTitle("Finish Examination")
             .setMessage("Are you sure you want to finish current examination?")
             .setPositiveButton("Yes", (dialog, which) -> countDownTimer.onFinish())
@@ -153,6 +159,8 @@ public class DoingExaminationActivity extends AppCompatActivity {
                     }
 
                     Intent intent = new Intent(DoingExaminationActivity.this, FinishExamActivity.class);
+                    intent.putExtra("correct_answer_amount", Utils.getCorrectAnswerAmount(mQuestions));
+                    intent.putExtra("question_amount", mQuestions.size());
                     startActivity(intent);
                 }
             };
