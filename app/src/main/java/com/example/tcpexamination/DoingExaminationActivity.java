@@ -17,13 +17,17 @@ import com.example.tcpexamination.adapter.ListQuestionAdapter;
 import com.example.tcpexamination.common.CustomLinearLayoutManager;
 import com.example.tcpexamination.utils.SocketUtil;
 import com.example.tcpexamination.utils.Utils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
 import entity.Examination;
+import entity.History;
 import entity.Question;
 
 public class DoingExaminationActivity extends AppCompatActivity {
+    private FirebaseUser currentUser;
     private Examination currentExamination;
     private List<Question> mQuestions;
     private boolean isFinished = false;
@@ -47,6 +51,7 @@ public class DoingExaminationActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         currentExamination = (Examination) intent.getSerializableExtra("current_examination");
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         mapComponents();
         initEvents();
@@ -101,6 +106,14 @@ public class DoingExaminationActivity extends AppCompatActivity {
             .setPositiveButton("Yes", (dialog, which) -> countDownTimer.onFinish())
             .setNegativeButton("No", null)
             .show());
+
+        btCancelExamination.setOnClickListener(v -> new AlertDialog.Builder(this)
+                .setIcon(getResources().getDrawable(R.drawable.ic_baseline_warning_24))
+                .setTitle("Cancel Examination")
+                .setMessage("Do you want to cancel current examination?")
+                .setPositiveButton("Yes", (dialog, which) -> finish())
+                .setNegativeButton("No", null)
+                .show());
     }
 
     public void disableScrollQuestions() {
@@ -158,8 +171,22 @@ public class DoingExaminationActivity extends AppCompatActivity {
                         isFinished = true;
                     }
 
+                    int correctAnswerAmount = Utils.getCorrectAnswerAmount(mQuestions);
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            History history = new History();
+                            history.setCorrectAnswerAmount(correctAnswerAmount);
+                            history.setTotalQuestionAmount(mQuestions.size());
+                            history.setAccountId(currentUser.getEmail());
+                            history.setExaminationId(currentExamination.getId());
+                            SocketUtil.getInstance().saveNewHistoryRecord(history);
+                        }
+                    }.start();
+
                     Intent intent = new Intent(DoingExaminationActivity.this, FinishExamActivity.class);
-                    intent.putExtra("correct_answer_amount", Utils.getCorrectAnswerAmount(mQuestions));
+                    intent.putExtra("correct_answer_amount", correctAnswerAmount);
                     intent.putExtra("question_amount", mQuestions.size());
                     startActivity(intent);
                 }

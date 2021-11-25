@@ -78,6 +78,17 @@ public class SocketUtil {
         return examinations;
     }
 
+    public void saveNewHistoryRecord(History history) {
+        try {
+            dos.writeUTF(SocketRequestType.SAVE_HISTORY_RECORD.getName());
+            dos.flush();
+            dos.writeObject(history);
+            dos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<History> getHistoryByAccountEmail(String accountEmail) {
         List<History> histories = new ArrayList<>();
         try {
