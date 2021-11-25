@@ -14,6 +14,7 @@ import java.util.List;
 
 import entity.Account;
 import entity.Examination;
+import entity.History;
 import entity.Question;
 
 public class SocketUtil {
@@ -77,19 +78,19 @@ public class SocketUtil {
         return examinations;
     }
 
-    public Account getAccount(String email) {
-        Account account = null;
+    public List<History> getHistoryByAccountEmail(String accountEmail) {
+        List<History> histories = new ArrayList<>();
         try {
-            dos.writeUTF(SocketRequestType.GET_ACCOUNT.getName());
+            dos.writeUTF(SocketRequestType.GET_HISTORY_OF_ACCOUNT.getName());
             dos.flush();
-//            dos.writeUTF(email);
-//            dos.flush();
-            account = (Account) din.readObject();
+            dos.writeUTF(accountEmail);
+            dos.flush();
+            histories = (List<History>) din.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return account;
+        return histories;
     }
 
     public List<Question> getQuestionByExamId(Long examinationId) {
